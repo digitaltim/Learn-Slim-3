@@ -2,7 +2,11 @@
 
 require 'vendor/autoload.php';
 
-$app = new \Slim\App;
+$app = new \Slim\App([
+	'settings' => [
+		'displayErrorDetails' => true,
+	]
+]);
 
 $container = $app->getContainer();
 
@@ -12,9 +16,7 @@ $container['greeting'] = function () {
 };
 
 $app->get('/', function () {
-	echo $this->greeting;
-	echo $this->greeting;
-	echo $this->greeting;
+	echo $this->none;
 });
 
 $app->run();
