@@ -30,7 +30,14 @@ $app->get('/', function ($request, $response, $args) {
 });
 
 $app->get('/users', function ($request, $response, $args) {
-	return $this->view->render($response, 'users.twig');
+	$users = [
+		'Billy',
+		'Bog',
+		'Body'
+	];
+	return $this->view->render($response, 'users.twig', [
+		'users' => $users,
+	]);
 });
 
 $app->run();
