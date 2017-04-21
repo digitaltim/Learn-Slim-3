@@ -13,12 +13,6 @@ $app = new \Slim\App([
 $container = $app->getContainer();
 
 // Register component on container
-$container['greeting'] = function () {
-	echo 'Home';
-	return 'Hello from the container';
-};
-
-// Register component on container
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig(__DIR__ . '/resources/views', [
         'cache' => false
@@ -31,8 +25,12 @@ $container['view'] = function ($container) {
     return $view;
 };
 
-$app->get('/', function () {
-	echo $this->greeting;
+$app->get('/', function ($request, $response, $args) {
+	return $this->view->render($response, 'home.twig');
+});
+
+$app->get('/users', function ($request, $response, $args) {
+	return $this->view->render($response, 'users.twig');
 });
 
 $app->run();
